@@ -1,2 +1,2 @@
-python3 sudtosat.py > Sat1.cnf
-minisat Sat1.cnf assign1.txt > stat.txt
+python3 sudtosat.py <puzzle.txt >puzzle.cnf
+minisat puzzle.cnf assign.txt >stat.txt

@@ -1,20 +1,22 @@
 from pprint import pp
+import fileinput
 
-test_sud = "163805070008040065005007008450082039301000040700000000839050000604200590000093081"
+sud = ""
+for line in fileinput.input():
+    sud += line
+
+# test_sud = "163805070008040065005007008450082039301000040700000000839050000604200590000093081"
 
 def convert_grid_to_val(i,j,num):
     return (81*(i-1))+(9*(j-1))+(num-1)+1
 
 sat = []
 
-# print(len(test_sud))
-
-
 for i in range(1,10):
     for j in range(1,10):
-        if test_sud[((i-1)*9)+j-1] not in ["0",".","*","?"]:
+        if sud[((i-1)*9)+j-1] not in ["0",".","*","?"]:
             # print(test_sud[((i-1)*9)+j-1])
-            sat.append(str(convert_grid_to_val(i,j,int(test_sud[((i-1)*9)+j-1]))) + " 0")
+            sat.append(str(convert_grid_to_val(i,j,int(sud[((i-1)*9)+j-1]))) + " 0")
 
 
 for i in range(1,10):
@@ -54,10 +56,9 @@ for k in range(1,10):
                         for t in range(1,4):
                             sat.append(str(-1*convert_grid_to_val(((3*a)+u),((3*b)+v),k))+" "+str(-1*convert_grid_to_val(((3*a)+w),((3*b)+t),k))+" 0")
 
+
 num_of_clauses = len(sat)
 num_of_variables = 729 # max num encoding can provide (81×8)+(9×8)+8+1
 header = "p cnf " + str(num_of_variables) + " " + str(num_of_clauses) + "\n"
 cnf = "\n".join(sat)
-# print(cnf)
-# print(num_of_clauses)
 print(header + cnf)
