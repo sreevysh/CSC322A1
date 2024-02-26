@@ -1,10 +1,11 @@
-# from pprint import pp
+from pprint import pp
 import fileinput
 
 sud = ""
 for line in fileinput.input():
     sud += line
 
+sud = sud = ''.join(sud.split())
 # test_sud = "163805070008040065005007008450082039301000040700000000839050000604200590000093081"
 
 def convert_grid_to_val(i,j,num):
@@ -14,7 +15,7 @@ sat = []
 
 for i in range(1,10):
     for j in range(1,10):
-        if sud[((i-1)*9)+j-1] not in ["0",".","*","?"]:
+        if sud[((i-1)*9)+j-1] not in ["0",".","*","?","\n"]:
             # print(test_sud[((i-1)*9)+j-1])
             sat.append(str(convert_grid_to_val(i,j,int(sud[((i-1)*9)+j-1]))) + " 0")
 
